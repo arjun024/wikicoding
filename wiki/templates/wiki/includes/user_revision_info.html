@@ -1,0 +1,27 @@
+{% load wiki_tags i18n %}
+{% load url from future %}
+
+<span>
+{{ revision.modified}}
+</span>
+<span>
+<a style="margin-left:30px" href="{% url 'wiki:get' language=revision|get_language_from_rev path=revision|get_path_from_rev %}">
+  {{ revision.title }}
+</a>
+</span>
+
+{% if revision.user_message %}
+  <span style="font-style:italic; margin-left: 30px;">({{ revision.user_message}})</span>
+{% elif revision.automatic_log %}
+  <span style="font-style:italic; margin-left: 30px;">({{ revision.automatic_log }})</span>
+{% endif %}
+
+{% if revision|get_language_from_rev != "_" %}
+<a href="{% url 'wiki:category' category=revision|get_language_from_rev %}" style="padding:0; display:inline;">
+{% else %}
+<a href="{% url 'wiki:category' category='text_article' %}" style="padding:0; display:inline;">
+{% endif %}
+  <span style="background:{{ revision|get_language_from_rev|lang_to_rgb }}; border-radius:2px; color:{{ revision|get_language_from_rev|lang_to_fontcolor_rgb }}; padding:5px; float:right; margin-top:9px;">
+    {{ revision|get_language_displayname_from_rev }}
+  </span>
+</a>

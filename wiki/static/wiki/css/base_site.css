@@ -1,0 +1,10 @@
+.wiki-navbar {background-color: #f5f5f5; border-bottom: 1px solid #e5e5e5;}
+.wiki-search-form{ width: auto;}
+.linenos { width: 1%; white-space: nowrap;}
+.wikicoding-codetable pre {background-color: #FFFFFF; border: #FFFFFF; max-height: none;}
+.wikicoding-code pre {white-space: pre-wrap;}
+.wiki-control textarea {height: initial !important; font-family: Consolas,Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,serif; font-size: 14px !important; border-radius: 0px !important;}
+.rh-master { background: #cedff2; padding: 0.2em 0.4em; border: 1px solid #a3b0bf;}
+.rh {margin-bottom: 5%}
+.reddit-top, .hn-top {border: 1px solid #cedff2; background: #f5faff; vertical-align: top; padding-left: 2%;}
+.wiki-catlinks {border: 1px solid #aaa; background-color: #f9f9f9; padding: 5px; margin-top: 5%; clear: both;}

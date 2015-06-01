@@ -1,0 +1,37 @@
+{% extends "wiki/base_site.html" %}
+{% load wiki_tags i18n sekizai_tags %}
+{% load url from future %}
+
+
+{% block wiki_pagetitle %}{% trans "Category" %}: {{ category|get_displayname }}{% block wiki_pagetitle_suffix %} - Wikicoding, the wikipedia of code{% endblock %}{% endblock %}
+
+{% block wiki_contents %}
+<div id="article-container">
+  <h1 id="article-title">
+    {% trans "Category" %}: 
+    <span style="background:{{ category|lang_to_rgb }}; border-radius:2px; color:{{ category|lang_to_fontcolor_rgb }}; padding:5px;">{{ category|get_displayname }}</span>
+  </h1>
+  <div class="container">
+    <ul>
+    {% for urlpath in urlpaths %}
+      {% if urlpath.slug %} {#avoid root article#}
+      <div class="row" style="margin-top:5px; margin-bottom:5px;">
+        <div class="col-lg-6">
+          {% if urlpath.language == "_" %}
+          <li><a href="/wiki/{{urlpath.slug}}">
+          {{ urlpath.slug|slug_to_title }}
+          </a></li>
+          {% else %}
+          <li><a href="{% url 'wiki:get' language=urlpath.language path=urlpath.path %}">
+          {{ urlpath.slug|slug_to_title }}
+          </a></li>
+          {% endif %}
+        </div>
+      </div>
+      {% endif %}
+    {% endfor %}
+    </ul>
+  </div>
+</div>
+
+{% endblock %}

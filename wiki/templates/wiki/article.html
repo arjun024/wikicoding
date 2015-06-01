@@ -1,0 +1,66 @@
+{% extends "wiki/base.html" %}
+{% load wiki_tags i18n sekizai_tags %}
+{% load url from future %}
+
+{% block wiki_pagetitle %}{% ifequal article.current_revision.title "Main Page" %}Wikicoding, the wikipedia of code{% else %}{{ article.current_revision.title }}{% endifequal %}{% endblock %}
+
+{% block wiki_pagetitle_suffix %}{% ifnotequal article.current_revision.title "Main Page" %} - Wikicoding, the wikipedia of code{% endifnotequal %}{% endblock %}
+
+{% block wiki_contents %}
+
+  <div id="article-container">
+    <ul class="nav nav-pills" id="article-menu" {% if urlpath.language != "_" %} style="border-bottom:0px" {% endif %}>
+      <li class="pull-left" id="article-title-li">
+        <h1 id="article-title" style="display:inline">
+          {% if urlpath.language == "_" and article.current_revision.title == "Main Page" %}
+          {% trans "Welcome to Wikicoding" %}
+          {% else %}
+          {{ article.current_revision.title }}
+          {% endif %}
+          <!-- <small style="font-size: 14px;">
+            {% if urlpath.parent %}
+            <a href="{% url 'wiki:get' language=urlpath.language path=urlpath.path %}"><span class="fa fa-bookmark"></span></a>
+            {% endif %}
+            {% if article.current_revision.locked %}
+              <span class="fa fa-lock"></span> {% trans "locked" %}
+            {% endif %}
+          </small> -->
+        </h1>
+        {% if urlpath.language != "_" %}
+        <a href="{% url 'wiki:category' category=urlpath.language %}" style="padding:0; display:inline;">
+          <span style="background:{{ urlpath.language|lang_to_rgb }}; border-radius:2px; color:{{ urlpath.language|lang_to_fontcolor_rgb }}; padding:10px;">{{ urlpath.language|get_displayname }}</span>
+        </a>
+        {% endif %}
+      </li>
+      {% include "wiki/includes/article_menu.html" %}
+    </ul>
+
+    {% if urlpath.language != "_" %}
+    <div style="float:right">{% trans "The article is written in " %}
+      <span style="font-weight:bold">{{ urlpath.language|get_description }}</span>
+    </div>
+    {% endif %}
+
+    <div>
+      {% block wiki_contents_tab %}
+      {% endblock %}
+    </div>
+
+    <div class="wiki-catlinks"> 
+      {% if urlpath.language != '_' %}
+      <span>
+        {% trans "Category" %}: <a href="{% url 'wiki:category' category=urlpath.language %}">{{ urlpath.language }}</a>
+      </span>
+      {% else %}
+      <span>
+        {% trans "Category" %}: <a href="{% url 'wiki:category' category='text_article' %}">text article</a>
+      </span>
+      {% endif %}
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block wiki_footer_prepend %}
+  <p style="margin-bottom: 10px;"><em>{% trans "This article was last modified:" %} {{ article.current_revision.modified }}</em></p>
+{% endblock %}

@@ -1,0 +1,63 @@
+.wikicoding-code .hll { background-color: #ffffcc }
+.wikicoding-code  { background: #ffffff; }
+.wikicoding-code .c { color: #888888 } /* Comment */
+.wikicoding-code .err { color: #FF0000; background-color: #FFAAAA } /* Error */
+.wikicoding-code .k { color: #008800; font-weight: bold } /* Keyword */
+.wikicoding-code .o { color: #333333 } /* Operator */
+.wikicoding-code .cm { color: #888888 } /* Comment.Multiline */
+.wikicoding-code .cp { color: #557799 } /* Comment.Preproc */
+.wikicoding-code .c1 { color: #888888 } /* Comment.Single */
+.wikicoding-code .cs { color: #cc0000; font-weight: bold } /* Comment.Special */
+.wikicoding-code .gd { color: #A00000 } /* Generic.Deleted */
+.wikicoding-code .ge { font-style: italic } /* Generic.Emph */
+.wikicoding-code .gr { color: #FF0000 } /* Generic.Error */
+.wikicoding-code .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.wikicoding-code .gi { color: #00A000 } /* Generic.Inserted */
+.wikicoding-code .go { color: #888888 } /* Generic.Output */
+.wikicoding-code .gp { color: #c65d09; font-weight: bold } /* Generic.Prompt */
+.wikicoding-code .gs { font-weight: bold } /* Generic.Strong */
+.wikicoding-code .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.wikicoding-code .gt { color: #0044DD } /* Generic.Traceback */
+.wikicoding-code .kc { color: #008800; font-weight: bold } /* Keyword.Constant */
+.wikicoding-code .kd { color: #008800; font-weight: bold } /* Keyword.Declaration */
+.wikicoding-code .kn { color: #008800; font-weight: bold } /* Keyword.Namespace */
+.wikicoding-code .kp { color: #003388; font-weight: bold } /* Keyword.Pseudo */
+.wikicoding-code .kr { color: #008800; font-weight: bold } /* Keyword.Reserved */
+.wikicoding-code .kt { color: #333399; font-weight: bold } /* Keyword.Type */
+.wikicoding-code .m { color: #6600EE; font-weight: bold } /* Literal.Number */
+.wikicoding-code .s { background-color: #fff0f0 } /* Literal.String */
+.wikicoding-code .na { color: #0000CC } /* Name.Attribute */
+.wikicoding-code .nb { color: #007020 } /* Name.Builtin */
+.wikicoding-code .nc { color: #BB0066; font-weight: bold } /* Name.Class */
+.wikicoding-code .no { color: #003366; font-weight: bold } /* Name.Constant */
+.wikicoding-code .nd { color: #555555; font-weight: bold } /* Name.Decorator */
+.wikicoding-code .ni { color: #880000; font-weight: bold } /* Name.Entity */
+.wikicoding-code .ne { color: #FF0000; font-weight: bold } /* Name.Exception */
+.wikicoding-code .nf { color: #0066BB; font-weight: bold } /* Name.Function */
+.wikicoding-code .nl { color: #997700; font-weight: bold } /* Name.Label */
+.wikicoding-code .nn { color: #0e84b5; font-weight: bold } /* Name.Namespace */
+.wikicoding-code .nt { color: #007700 } /* Name.Tag */
+.wikicoding-code .nv { color: #996633 } /* Name.Variable */
+.wikicoding-code .ow { color: #000000; font-weight: bold } /* Operator.Word */
+.wikicoding-code .w { color: #bbbbbb } /* Text.Whitespace */
+.wikicoding-code .mb { color: #6600EE; font-weight: bold } /* Literal.Number.Bin */
+.wikicoding-code .mf { color: #6600EE; font-weight: bold } /* Literal.Number.Float */
+.wikicoding-code .mh { color: #005588; font-weight: bold } /* Literal.Number.Hex */
+.wikicoding-code .mi { color: #0000DD; font-weight: bold } /* Literal.Number.Integer */
+.wikicoding-code .mo { color: #4400EE; font-weight: bold } /* Literal.Number.Oct */
+.wikicoding-code .sb { background-color: #fff0f0 } /* Literal.String.Backtick */
+.wikicoding-code .sc { color: #0044DD } /* Literal.String.Char */
+.wikicoding-code .sd { color: #DD4422 } /* Literal.String.Doc */
+.wikicoding-code .s2 { background-color: #fff0f0 } /* Literal.String.Double */
+.wikicoding-code .se { color: #666666; font-weight: bold; background-color: #fff0f0 } /* Literal.String.Escape */
+.wikicoding-code .sh { background-color: #fff0f0 } /* Literal.String.Heredoc */
+.wikicoding-code .si { background-color: #eeeeee } /* Literal.String.Interpol */
+.wikicoding-code .sx { color: #DD2200; background-color: #fff0f0 } /* Literal.String.Other */
+.wikicoding-code .sr { color: #000000; background-color: #fff0ff } /* Literal.String.Regex */
+.wikicoding-code .s1 { background-color: #fff0f0 } /* Literal.String.Single */
+.wikicoding-code .ss { color: #AA6600 } /* Literal.String.Symbol */
+.wikicoding-code .bp { color: #007020 } /* Name.Builtin.Pseudo */
+.wikicoding-code .vc { color: #336699 } /* Name.Variable.Class */
+.wikicoding-code .vg { color: #dd7700; font-weight: bold } /* Name.Variable.Global */
+.wikicoding-code .vi { color: #3333BB } /* Name.Variable.Instance */
+.wikicoding-code .il { color: #0000DD; font-weight: bold } /* Literal.Number.Integer.Long */

@@ -1,0 +1,15 @@
+[Unit]
+Description=uWSGI
+After=syslog.target
+
+[Service]
+ExecStart = /wikicoding/tools/runuwsgi.sh
+ExecStop = kill -INT `cat /run/uwsgi.pid`
+ExecReload = kill -TERM `cat /run/uwsgi.pid`
+Restart = always
+Type = notify
+NotifyAccess = main
+PIDFile = /run/uwsgi.pid
+
+[Install]
+WantedBy=multi-user.target

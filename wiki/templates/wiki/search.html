@@ -1,0 +1,61 @@
+{% extends "wiki/base.html" %}
+{% load wiki_tags i18n humanize %}
+{% load url from future %}
+
+
+{% block wiki_pagetitle %}
+{% if search_query %}
+  {% trans "Search results for:" %} {{ search_query }}
+{% else %}
+  {% trans "Search" %}
+{% endif %}
+{% endblock %}
+
+{% block wiki_contents %}
+
+{% if search_query %}
+<h1 class="page-header">{% trans "Search results for:" %} <i>{{ search_query }}</i></h1>
+{% else %}
+<h1 class="page-header">{% trans "Search" %}</h1>
+{% endif %}
+
+<span>{% trans "To filter by language, you can use" %} <strong>"language: <a href="/wiki/Manual_of_Style/#languages" target="_blank">&lt;language-code&gt;</a>"</strong> {% trans "in the seach query" %}</span>
+
+<form class="form-search directory-toolbar">
+<p class="lead">
+  <div class="pull-right">
+    <div class="input-group">
+      <input type="search" class="form-control search-query" name="q" value="{{ search_query }}" />
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button">
+          <span class="fa fa-search"></span>
+        </button>
+      </span>
+    </div>
+  </div>
+  <p>{% blocktrans with paginator.object_list.count as cnt %}Your search returned <strong>{{ cnt }}</strong> results.{% endblocktrans %}</p>
+  <div class="clearfix"></div>
+</p>
+</form>
+
+<table class="table table-striped">
+  <tr>
+    <th style="width: 75%">{% trans "Title" %}</th>
+    <th>{% trans "Last modified" %}</th>
+  </tr>
+  {% for article in articles %}
+    {% block wiki_search_loop %}
+    {% include "wiki/includes/searchresult.html" %}
+    {% endblock %}
+    {% empty%}
+    <tr>
+      <td colspan="100">
+        <em>{% trans "There are no articles in this level" %}</em>
+      </td>
+    </tr>
+  {% endfor %}
+</table>
+
+{% include "wiki/includes/pagination.html" %}
+
+{% endblock %}

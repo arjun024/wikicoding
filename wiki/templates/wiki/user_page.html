@@ -1,0 +1,162 @@
+{% extends "wiki/base_site.html" %}
+{% load wiki_tags i18n sekizai_tags %}
+{% load url from future %}
+
+{% block wiki_pagetitle %}{{ userpage_user.username }}{% endblock %}
+
+{% block wiki_contents %}
+
+{% include "wiki/includes/modals.html" %}
+
+{% addtoblock "js" %}
+<script type="text/javascript" src="{{ STATIC_URL }}wiki/js/diffview.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}wiki/js/diff.js"></script>
+{% endaddtoblock %}
+{% addtoblock "css" %}
+<style type="text/css">
+  td.linenumber {
+    width: 20px;
+  }
+  tr.insert td {
+    background-color: #DFC;
+  }
+  tr.delete td {
+    background-color: #FDC;
+  }
+  tr.equal td {
+    background-color: #F2F2F2;
+  }
+  
+  .diff-container td {
+    white-space: pre; font-family: monospace;
+  }
+  .diff-container td,
+  .diff-container th {
+    padding: 2px 7px;
+    border-right: 1px solid #DDD;    
+  }
+  .diff-container td:last-child,
+  .diff-container th:last-child {
+    border-right: none;
+  }
+  .diff-container table {
+    border-top: 1px solid #DDD;    
+  }
+</style>
+{% endaddtoblock %}
+
+
+<div id="article-container">
+  <div class="col-md-12 reddit-top-hn-top">
+      <div class="row">
+        {% if usertype == "username" %}
+          <div class="col-sm-3">
+              <div style="background-color: #f5f5f5;" itemtype="http://schema.org/Person">
+                <a href="" aria-label="avatar"><img alt="" class="avatar" data-user="{{ userpage_user.username }}" height="171" src="/static/wiki/img/avatar.png" width="171"></a>
+                <h1>
+                  <!-- {#{you are logged in as {{user.username}} }#} -->
+                  <span style="font-size:26px;display: block;" itemprop="name"><strong>{{userpage_user.first_name}} {{userpage_user.last_name}}</strong></span>
+                  <span style="font-size:20px;color:#666"itemprop="additionalName">{{ userpage_user.username }}</span>
+                </h1>
+                <div>
+                  <span style="font-size:15px;color:#555">{% trans "Joined on" %} {{ userpage_user.date_joined|get_date_from_datetime }}</span>
+                </div>
+                <div>
+                  <span style="font-size:15px;color:#555">{% trans "User wiki page" %}: <a href="/wiki/User:{{userpage_user.username}}/">User:{{userpage_user.username}}</a></span>
+                </div>
+              </div>
+          </div>
+          {% endif %}
+          <div class="col-sm-9">
+              <div>
+                <div> {% trans "User Contributions" %}<div>
+                <br/><br/>
+                <form method="GET">
+                  <div class="tab-content" style="overflow:visible;">
+                    {% for revision in revisions %}
+                      <div class="panel-group" id="accordion{{ revision.id }}">
+                        <div class="panel">
+                          <div>
+                            <a class="panel-toggle" style="float: left;" href="#collapse{{ revision.id }}" onclick="get_diff_json('{% url 'wiki:diff' revision.id %}', $('#collapse{{ revision.id }}'))">
+                              <i class="fa fa-plus"></i>
+                              {% include "wiki/includes/user_revision_info.html" %}
+                            </a>
+                            <div class="progress progress-striped active" style="display: none; width: 40px; float: left; margin-top: 7px; margin-bottom: -7px;">
+                              <div class="bar" style="width: 100%;"></div>
+                            </div>
+                            <div class="pull-right" style="vertical-align: middle; margin: 8px 8px;">
+                              <button type="submit" class="btn btn-default" onclick="$('#previewModal').modal('show'); this.form.target='previewWindow'; this.form.r.value='{{ revision.id }}'; this.form.action='{% url 'wiki:preview_revision' revision.article_id %}'; $('#previewModal .switch-to-revision').attr('href', '{% url 'wiki:change_revision' language=revision|get_language_from_rev path=revision|get_path_from_rev article_id=revison.article_id revision_id=revision.id %}')">
+                                <span class="fa fa-eye fa-fw"></span>
+                                {% trans "Preview this revision" %}
+                              </button>
+                              
+                            </div>
+                            <div style="clear: both"></div>
+                          </div>
+                          <div id="collapse{{ revision.id }}" class="panel-collapse collapse">
+                            <div class="panel-body diff-container" style="padding: 0;">
+                              <dl class="dl-horizontal">
+                                <dt>{% trans "Auto log:" %}</dt>
+                                <dd>{{ revision.automatic_log|default:"-"|linebreaksbr }}</dd>
+                              </dl>
+                              <table class="table table-condensed" style="margin: 0; border-collapse: collapse;">
+                                <thead>
+                                  <tr>
+                                    <th class="linenumber">{% if revision.previous_revision %}#{{revision.previous_revision.revision_number}}{% endif %}</th>
+                                    <th class="linenumber">#{{revision.revision_number}}</th>
+                                    <th>{% trans "Change" %}</th>
+                                  </tr>
+                                </thead>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    {% endfor %}
+                    
+                    {% include "wiki/includes/pagination.html" %}
+                  </div>
+
+                  <input type="hidden" name="r" value="" />
+                  <div class="modal fade wiki-modal" id="previewModal">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-body">
+                          <iframe name="previewWindow" frameborder="0"></iframe>
+                        </div>
+                        <div class="modal-footer">
+                          <a href="#" class="btn btn-default btn-lg" data-dismiss="modal">
+                            <span class="fa fa-arrow-circle-left"></span>
+                            {% trans "Back" %}
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="modal fade wiki-modal" id="mergeModal">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h1>{% trans "Merge with current" %}</h1>
+                          <p class="lead"><span class="fa fa-info-circle"></span> {% trans "When you merge a revision with the current, all data will be retained from both versions and merged at its approximate location from each revision." %} <strong>{% trans "After this, it's important to do a manual review." %}</strong></p>
+                        </div>
+                        <div class="modal-body">
+                          <iframe name="mergeWindow" frameborder="0" style="min-height: 0;"></iframe>
+                        </div>
+                        <div class="modal-footer">
+                          <a href="#" class="btn btn-default btn-lg" data-dismiss="modal">
+                            <span class="fa fa-arrow-circle-left"></span>
+                            {% trans "Back to history view" %}
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+{% endblock %}
