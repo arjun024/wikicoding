@@ -1,0 +1,3 @@
+* Let users add category to articles.
+* Syntax highlighting as the user edits.
+* Compile/build program on each edit and display build status.
