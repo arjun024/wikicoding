@@ -469,7 +469,7 @@ class UserCreationForm(UserCreationForm):
     
     def __init__(self, *args, **kwargs):
         super(UserCreationForm, self).__init__(*args, **kwargs)
-        self.reserved_words = ['admin', 'root', 'wiki', 'meta', '_accounts', 'accounts', '_search',
+        self.reserved_words = ['wikicoding', 'admin', 'root', 'wiki', 'meta', '_accounts', 'accounts', '_search',
         '_revision', 'LICENSE', 'raw', 'plugin', 'user', 'log', 'pages', 'recent', 'robots.txt', 'policies', 'donate']
         
         # Add honeypots
