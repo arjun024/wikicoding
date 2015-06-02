@@ -10,21 +10,13 @@
 
   <div id="article-container">
     <ul class="nav nav-pills" id="article-menu" {% if urlpath.language != "_" %} style="border-bottom:0px" {% endif %}>
-      <li class="pull-left" id="article-title-li">
+      <li class="pull-left" id="article-title-li" style="max-width:71%">
         <h1 id="article-title" style="display:inline">
           {% if urlpath.language == "_" and article.current_revision.title == "Main Page" %}
           {% trans "Welcome to Wikicoding" %}
           {% else %}
           {{ article.current_revision.title }}
           {% endif %}
-          <!-- <small style="font-size: 14px;">
-            {% if urlpath.parent %}
-            <a href="{% url 'wiki:get' language=urlpath.language path=urlpath.path %}"><span class="fa fa-bookmark"></span></a>
-            {% endif %}
-            {% if article.current_revision.locked %}
-              <span class="fa fa-lock"></span> {% trans "locked" %}
-            {% endif %}
-          </small> -->
         </h1>
         {% if urlpath.language != "_" %}
         <a href="{% url 'wiki:category' category=urlpath.language %}" style="padding:0; display:inline;">
