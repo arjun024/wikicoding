@@ -41,9 +41,15 @@ class WikiIndent(Pattern):
             return ''
         count = m.group(2).count(':')
         padding = 2 * count
-        span = etree.Element('span')
-        span.set('style', 'padding-right:%sem' % str(padding))
-        return span
+        scrpt = etree.Element('script')
+        scrpt.text = """
+            s = document.currentScript;
+            if (s.parentNode.nodeName.toLowerCase() == 'p') {
+                p = s.parentNode
+                p.style.paddingLeft= "%sem";
+            }
+        """ % str(padding)
+        return scrpt
 
 def makeExtension(*args, **kwargs):
     return WikiIndentExtension(*args, **kwargs)
