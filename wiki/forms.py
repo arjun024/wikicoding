@@ -466,7 +466,16 @@ class UserCreationForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=False)
     last_name = forms.CharField(max_length=30,  required=False)
     email = forms.EmailField(required=True, label="Email (%s)" % _("not displayed"))
-    
+
+    #override username - we have a more restrictive regex
+    username = forms.RegexField(label=_("Username"), max_length=15,
+        regex=r'^(?:\w){4,15}$',
+        help_text=_("Required. Between 4 and 15 characters. Letters, digits and "
+                      "_ only."),
+        error_messages={
+            'invalid': _("This value may contain only letters, numbers and "
+                         "_ character.")})
+
     def __init__(self, *args, **kwargs):
         super(UserCreationForm, self).__init__(*args, **kwargs)
         self.reserved_words = ['wikicoding', 'admin', 'root', 'wiki', 'meta', '_accounts', 'accounts', '_search',
