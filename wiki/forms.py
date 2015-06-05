@@ -469,12 +469,12 @@ class UserCreationForm(UserCreationForm):
 
     #override username - we have a more restrictive regex
     username = forms.RegexField(label=_("Username"), max_length=15,
-        regex=r'^(?:\w){4,15}$',
+        regex=r'^[a-zA-Z](?:\w){3,14}$',
         help_text=_("Required. Between 4 and 15 characters. Letters, digits and "
-                      "_ only."),
+                      "_ only. Must begin with a letter."),
         error_messages={
             'invalid': _("This value may contain only letters, numbers and "
-                         "_ character.")})
+                         "_ character, and begin only with a letter.")})
 
     def __init__(self, *args, **kwargs):
         super(UserCreationForm, self).__init__(*args, **kwargs)
