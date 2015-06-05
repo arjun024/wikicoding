@@ -2,9 +2,11 @@
 
 *Every code has a silver lining*
 
-wikicoidng is the engine that powers [Wikicoding](http://wikicoding.org), the wikipedia of code.
+wikicoding is the engine that powers [Wikicoding](http://wikicoding.org), the wikipedia of code.
 
-It servers as a wiki engine that manages a wiki of  code articles.
+Anyone can use it to run an instance of wikicoding of their own.
+
+It serves as a wiki engine that manages a wiki of code articles.
 
 This is a nonprofit, free and open source project.
 
