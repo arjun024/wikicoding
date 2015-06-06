@@ -1,1 +1,7 @@
 User-agent: *
+Disallow: /_accounts/*
+Disallow: /wiki/_/*
+Disallow: /raw/*
+Disallow: /*/_edit/$
+Disallow: /*/_history/$
+Disallow: *?page=*
