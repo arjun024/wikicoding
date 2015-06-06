@@ -2,7 +2,7 @@
 {% load wiki_tags i18n sekizai_tags %}
 {% load url from future %}
 
-{% block wiki_pagetitle %}{% ifequal article.current_revision.title "Main Page" %}Wikicoding, the wikipedia of code{% else %}{{ article.current_revision.title }}{% endifequal %}{% endblock %}
+{% block wiki_pagetitle %}{% if article.current_revision.title == "Main Page" %}Wikicoding, the wikipedia of code{% elif urlpath.language == "_" %}{{ article.current_revision.title }}{% else %}{{ article.current_revision.title }} [{{ urlpath.language|get_displayname }}]{% endif %}{% endblock %}
 
 {% block wiki_pagetitle_suffix %}{% ifnotequal article.current_revision.title "Main Page" %} - Wikicoding, the wikipedia of code{% endifnotequal %}{% endblock %}
 
