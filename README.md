@@ -2,7 +2,7 @@
 
 *Every code has a silver lining*
 
-wikicoding is the engine that powers [Wikicoding](http://wikicoding.org), the wikipedia of code.
+wikicoding is the engine that powers [Wikicoding](https://wikicoding.org), the wikipedia of code.
 
 Anyone can use it to run an instance of wikicoding of their own.
 
@@ -31,7 +31,7 @@ borrows a good part of its codebase from the [django-wiki](https://github.com/dj
 
 ### The stack
 
-[Wikicoding](http://wikicoding.org) is an implementation of this project.
+[Wikicoding](https://wikicoding.org) is an implementation of this project.
 It depends on [nginx](http://nginx.org) to server static files, and [uWSGI](https://github.com/unbit/uwsgi) to run the
 python application.
 [MySQL](https://www.mysql.com) serves as the database.
