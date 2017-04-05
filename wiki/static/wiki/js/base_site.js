@@ -117,7 +117,8 @@ function reddit_hn_top_init (){
     return
   /* reddit */
   var d;
-  window.wikicoding.reddit_ajax = $.ajax('http://www.reddit.com/r/programming/top.json?limit=10')
+  var protocol = window.location.protocol;
+  window.wikicoding.reddit_ajax = $.ajax(protocol + '//www.reddit.com/r/programming/top.json?limit=10')
     .done(function(x){
       d=x.data.children;
       var divlist = [];
@@ -143,12 +144,12 @@ function reddit_hn_top_init (){
       for (var i = 0; i < Math.min(json.length, 10); i++) {
           (function(i) {
               var $a = $("<a target='_blank' />");
-              var $c = $("<a target='_blank' style='font-style:italic;font-size:0.8em' href='https://news.ycombinator.com/item?id="+json[i]+"'/>");
+              var $c = $("<a target='_blank' style='font-style:italic;font-size:0.8em' href='" + protocol + "//news.ycombinator.com/item?id="+json[i]+"'/>");
               $.getJSON('https://hacker-news.firebaseio.com/v0/item/' + json[i] + '.json', function(j) {
                   if (j.url)
                     $a.attr('href', j.url).text(j.title);
                   else
-                    $a.attr('href', "https://news.ycombinator.com/item?id=" + j.id).text(j.title);
+                    $a.attr('href', protocol + "//news.ycombinator.com/item?id=" + j.id).text(j.title);
                   $c.text(j.descendants + " comments");
               });
               $('<div  class="rh"/>').append($a)
